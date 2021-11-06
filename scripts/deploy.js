@@ -5,7 +5,8 @@ const main = async () => {
     [
       "https://imgur.com/pKra7We", // gifs
       "https://imgur.com/t/undertale/EcmBZoZ",
-      "https://imgur.com/6wEO7cv",
+      //   "https://imgur.com/6wEO7cv",
+      "https://imgur.com/gallery/15UmAMe",
     ],
     ["Insult Appearance!", "Tell them to eat veggies", "Refuse to say gm!"],
     // HP values
@@ -13,7 +14,11 @@ const main = async () => {
     //attack damage
     [10, 30, 50],
     // attack cooldown
-    [15, 18, 20]
+    [15, 18, 20],
+    "Greater Doge", //boss name
+    10000, // boss hp
+    60, // boss damage
+    "https://imgur.com/gallery/j086aiq" // boss image
   );
   await gameContract.deployed();
   console.log("game contract deployed to: ", gameContract.address);
@@ -22,9 +27,20 @@ const main = async () => {
   // Use character index as 1,2,3 etc, don't bother with 0-indexing
   txn = await gameContract.mintCharacterNFT(3);
   await txn.wait();
+  console.log("Minted NFT #1");
 
-  let returnedTokenUri = await gameContract.tokenURI(1);
-  console.log("Token URI:", returnedTokenUri);
+  // Use character index as 1,2,3 etc, don't bother with 0-indexing
+  txn = await gameContract.mintCharacterNFT(2);
+  await txn.wait();
+  console.log("Minted NFT #2");
+
+  // Use character index as 1,2,3 etc, don't bother with 0-indexing
+  txn = await gameContract.mintCharacterNFT(1);
+  await txn.wait();
+  console.log("Minted NFT #3");
+
+  const getTokenURI = await gameContract.tokenURI(1);
+  console.log("token URI for #1 NFT:", getTokenURI);
 };
 
 const runMain = async () => {
