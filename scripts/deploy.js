@@ -3,10 +3,9 @@ const main = async () => {
   const gameContract = await gameContractFactory.deploy(
     ["Annoying Dog", "Flowey", "Sans"], // Names
     [
-      "https://i.imgur.com/pKra7We", // gifs
-      "https://i.imgur.com/t/undertale/EcmBZoZ",
-      //   "https://imgur.com/6wEO7cv",
-      "https://i.imgur.com/gallery/15UmAMe",
+      "https://i.imgur.com/pKra7We.gif", // gifs
+      "https://i.imgur.com/EcmBZoZ.gif",
+      "https://imgur.com/6wEO7cv.gif",
     ],
     ["Insult Appearance!", "Tell them to eat veggies", "Refuse to say gm!"],
     // HP values

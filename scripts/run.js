@@ -46,8 +46,8 @@ const main = async () => {
   txn = await gameContract.attackBoss(2);
   await txn.wait();
 
-  txn = await gameContract.attackBoss(2);
-  await txn.wait();
+  //   txn = await gameContract.attackBoss(2);
+  //   await txn.wait();
 };
 
 const runMain = async () => {
