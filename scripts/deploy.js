@@ -12,10 +12,10 @@ const main = async () => {
     [100, 200, 300],
     //attack damage
     [10, 30, 50],
-    "Greater Doge", //boss name
+    "Doggo", //boss name
     10000, // boss hp
     60, // boss damage
-    "https://imgur.com/gallery/j086aiq" // boss image
+    "https://c.tenor.com/Sr0LbfLkhM8AAAAC/undertaile-undertale.gif" // boss image
   );
   await gameContract.deployed();
   console.log("game contract deployed to: ", gameContract.address);

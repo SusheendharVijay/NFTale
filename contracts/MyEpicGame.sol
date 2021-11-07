@@ -20,6 +20,7 @@ contract MyEpicGame is ERC721 {
         uint256 hp;
         uint256 maxhp;
         uint256 attackDamage;
+        uint256 nft_id;
     }
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
@@ -42,7 +43,11 @@ contract MyEpicGame is ERC721 {
         uint256 characterIndex
     );
 
-    event AttackComplete(uint256 newBossHp, uint256 newCharacterHp);
+    event AttackComplete(
+        uint256 newBossHp,
+        uint256 newCharacterHp,
+        uint256 nft_index
+    );
 
     constructor(
         string[] memory characterNames,
@@ -79,7 +84,8 @@ contract MyEpicGame is ERC721 {
                     attackType: characterAttackType[i],
                     hp: characterHp[i],
                     maxhp: characterHp[i],
-                    attackDamage: characterAttackDmg[i]
+                    attackDamage: characterAttackDmg[i],
+                    nft_id: 0
                 })
             );
 
@@ -104,7 +110,8 @@ contract MyEpicGame is ERC721 {
             attackType: defaultCharacters[_characterIndex - 1].attackType,
             hp: defaultCharacters[_characterIndex - 1].hp,
             maxhp: defaultCharacters[_characterIndex - 1].hp,
-            attackDamage: defaultCharacters[_characterIndex - 1].attackDamage
+            attackDamage: defaultCharacters[_characterIndex - 1].attackDamage,
+            nft_id: newItemId
         });
         console.log(
             "Minted NFT w/ tokenId %s and characterIndex %s",
@@ -202,7 +209,7 @@ contract MyEpicGame is ERC721 {
         console.log("Player attacked boss. New boss hp: %s", bigBoss.hp);
         console.log("Boss attacked player. New player hp: %s\n", player.hp);
 
-        emit AttackComplete(bigBoss.hp, player.hp);
+        emit AttackComplete(bigBoss.hp, player.hp, nft_index);
     }
 
     function checkIfUserHasNFT() public view returns (uint256[] memory) {
@@ -221,5 +228,14 @@ contract MyEpicGame is ERC721 {
 
     function getBigBoss() public view returns (BigBoss memory) {
         return bigBoss;
+    }
+
+    function getAttributes(uint256 nftTokenId)
+        external
+        view
+        returns (CharacterAttributes memory)
+    {
+        CharacterAttributes memory attributes = nftHolderAttributes[nftTokenId];
+        return attributes;
     }
 }
